@@ -40,7 +40,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/joblog")
 public class JobLogController {
-	private static Logger logger = LoggerFactory.getLogger(JobLogController.class);
+	private static final Logger logger = LoggerFactory.getLogger(JobLogController.class);
 
 	@Resource
 	private XxlJobGroupDao xxlJobGroupDao;
@@ -57,7 +57,7 @@ public class JobLogController {
 
 		// filter group
 		List<XxlJobGroup> jobGroupList = JobInfoController.filterJobGroupByRole(request, jobGroupList_all);
-		if (jobGroupList==null || jobGroupList.size()==0) {
+		if (jobGroupList==null || jobGroupList.isEmpty()) {
 			throw new XxlJobException(I18nUtil.getString("jobgroup_empty"));
 		}
 
@@ -99,7 +99,7 @@ public class JobLogController {
 		// parse param
 		Date triggerTimeStart = null;
 		Date triggerTimeEnd = null;
-		if (filterTime!=null && filterTime.trim().length()>0) {
+		if (filterTime!=null && !filterTime.trim().isEmpty()) {
 			String[] temp = filterTime.split(" - ");
 			if (temp.length == 2) {
 				triggerTimeStart = DateUtil.parseDateTime(temp[0]);
@@ -142,7 +142,7 @@ public class JobLogController {
 			// valid
 			XxlJobLog jobLog = xxlJobLogDao.load(logId);	// todo, need to improve performance
 			if (jobLog == null) {
-				return new ReturnT<LogResult>(ReturnT.FAIL_CODE, I18nUtil.getString("joblog_logid_unvalid"));
+				return new ReturnT<>(ReturnT.FAIL_CODE, I18nUtil.getString("joblog_logid_unvalid"));
 			}
 
 			// log cat
@@ -166,7 +166,7 @@ public class JobLogController {
 			return logResult;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			return new ReturnT<LogResult>(ReturnT.FAIL_CODE, e.getMessage());
+			return new ReturnT<>(ReturnT.FAIL_CODE, e.getMessage());
 		}
 	}
 

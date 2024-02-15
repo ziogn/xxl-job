@@ -49,7 +49,7 @@ public class XxlJobGroup {
                     .map(i -> i.getUri().toString())
                     .collect(Collectors.toList());
         }
-        return List.of(address);
+        return Collections.singletonList(address);
     }
 
     public int getId() {

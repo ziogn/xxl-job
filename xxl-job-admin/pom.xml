@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-			<version>2022.0.0.0</version>
+			<version>2021.0.6.0</version>
 		</dependency>
 
 		<!-- ziognTodo 暂时移除nacos的配置中心，有空再进行配置
